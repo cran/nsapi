@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Roel M. Hogervorst" />
+
+<meta name="date" content="2018-08-04" />
+
+<title>Basic use of the nsapi package</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Basic use of the nsapi package</h1>
+<h4 class="author"><em>Roel M. Hogervorst</em></h4>
+<h4 class="date"><em>2018-08-04</em></h4>
+
+
+
+<p>This is a description and use of all the functions in the package.</p>
+<p>The API returns everything in Dutch and therefore I have kept the responses in Dutch as well. The NS website does have a English translation which I will link to here: <a href="https://www.ns.nl/en/travel-information/ns-api" class="uri">https://www.ns.nl/en/travel-information/ns-api</a>.</p>
+<p>First a description of how to set up your username and password and than a breakdown of all the functions.</p>
+<div id="authentication" class="section level1">
+<h1>Authentication</h1>
+<p>Before you can use any of the functions you need a username and password To get that go to: <a href="https://www.ns.nl/ews-aanvraagformulier/" class="uri">https://www.ns.nl/ews-aanvraagformulier/</a></p>
+<p>You will receive a confirmation email, and finally a username and password (that can’t be changed for some reason).</p>
+<p>You need to add the username and password to your rsession for the nsapi package to work. Why? Good question! It is not smart to type your passwords in a R session, they will end up in your history file and will be available for everyone who searches your computer. You might think that this password and account is not that important and you might be right, but let’s do the right thing anyway.</p>
+<div id="temporary-adding-acountname-and-password-to-your-session" class="section level2">
+<h2>Temporary adding acountname and password to your session</h2>
+<p>A temporary way is to add them to your session with :</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">Sys.setenv</span>(<span class="dt">NSAPIACCOUNT =</span> <span class="st">&quot;probablyyouremail@email.com&quot;</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">Sys.setenv</span>(<span class="dt">NSAPIPW =</span> <span class="st">&quot;yourpasswordgiveninplaintextoveremailwhydopeopledothisohgod&quot;</span>)</a></code></pre></div>
+<p>At the end of your session (if you go to a new project, if you restart R or if you crash) the keys are removed from memory. Keep in mind that this DOES put your password in the history file and is therefore NOT recommended.</p>
+</div>
+<div id="permanently-adding-username-and-password-to-your-r-session" class="section level2">
+<h2>Permanently adding username and password to your r session</h2>
+<p>Go to your global .Renviron file (or make one) and add the keys</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">file.edit</span>(<span class="st">&quot;~./.Renviron&quot;</span>)</a></code></pre></div>
+<p>The file will open and you can add two entries:</p>
+<pre><code>NSAPIPW = yourpasswordgiveninplaintextoveremailwhydopeopledothisohgod
+NSAPIACCOUNT = probablyyouremail@email.com</code></pre>
+<p>How do you know if you succeeded?</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">check_ns_api_keys</span>()</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; Your username is set,</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; your password is set</span></a></code></pre></div>
+</div>
+</div>
+<div id="getting-travel-advise" class="section level1">
+<h1>Getting travel advise</h1>
+<p>If you’d like to know when your train from Amsterdam to Groningen goes, use the travel_advise function with departure and arrival station.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(nsapi)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">ams_to_ut &lt;-<span class="st"> </span><span class="kw">get_travel_advise</span>(</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">  <span class="dt">fromStation =</span> <span class="st">&quot;Amsterdam Centraal&quot;</span>,</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">  <span class="dt">toStation =</span> <span class="st">&quot;Utrecht Centraal&quot;</span>,</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="co">#dateTime = , # I don't use it because I want to leave now!</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">  <span class="dt">departure =</span> <span class="ot">TRUE</span>  <span class="co"># I want to depart now</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">)</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">ams_to_ut[,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;   Melding AantalOverstappen GeplandeReisTijd ActueleReisTijd</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 1      NA                 0             0:26            0:26</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; 2      NA                 0             0:26            0:26</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; 3      NA                 0             0:27            0:27</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; 4      NA                 0             0:26            0:26</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 5      NA                 0             0:24            0:24</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 6      NA                 0             0:27            0:27</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; 7      NA                 0             0:27            0:27</span></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; 8      NA                 0             0:26            0:26</span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt; 9      NA                 0             0:26            0:26</span></a>
+<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#&gt;   VertrekVertraging</span></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">#&gt; 1              &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#&gt; 2              &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="co">#&gt; 3              &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb5-23" data-line-number="23"><span class="co">#&gt; 4              &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb5-24" data-line-number="24"><span class="co">#&gt; 5              &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb5-25" data-line-number="25"><span class="co">#&gt; 6              &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb5-26" data-line-number="26"><span class="co">#&gt; 7              &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb5-27" data-line-number="27"><span class="co">#&gt; 8              &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb5-28" data-line-number="28"><span class="co">#&gt; 9              &lt;NA&gt;</span></a></code></pre></div>
+<p>The function returns a data.frame with 4 advises before and 4 after the time you selected.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">ams_to_ut[,<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>]</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt;   AankomstVertraging Optimaal GeplandeVertrekTijd</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; 1               &lt;NA&gt;    FALSE 2018-08-04 10:05:00</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; 2               &lt;NA&gt;    FALSE 2018-08-04 10:14:00</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; 3               &lt;NA&gt;    FALSE 2018-08-04 10:25:00</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 4               &lt;NA&gt;    FALSE 2018-08-04 10:35:00</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 5               &lt;NA&gt;     TRUE 2018-08-04 10:40:00</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 6               &lt;NA&gt;    FALSE 2018-08-04 10:45:00</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; 7               &lt;NA&gt;    FALSE 2018-08-04 10:55:00</span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; 8               &lt;NA&gt;    FALSE 2018-08-04 11:05:00</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; 9               &lt;NA&gt;    FALSE 2018-08-04 11:14:00</span></a></code></pre></div>
+<div id="more-details-about-the-returned-dataframe." class="section level2">
+<h2>More details about the returned dataframe.</h2>
+<p>The column Reisdeel is a nested data frame with a nested data frame called stops within.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">str</span>(ams_to_ut[<span class="dv">1</span>,<span class="dv">13</span>])</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; List of 1</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt;  $ :'data.frame':    1 obs. of  5 variables:</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;   ..$ Vervoerder : chr &quot;NS&quot;</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;   ..$ VervoerType: chr &quot;Intercity&quot;</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;   ..$ RitNummer  : chr &quot;835&quot;</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;   ..$ Status     : chr &quot;VOLGENS-PLAN&quot;</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt;   ..$ Stops      :List of 1</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt;   .. ..$ :'data.frame':  3 obs. of  4 variables:</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt;   .. .. ..$ Naam          : chr [1:3] &quot;Amsterdam Centraal&quot; &quot;Amsterdam Amstel&quot; &quot;Utrecht Centraal&quot;</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt;   .. .. ..$ Tijd          : POSIXct[1:3], format: &quot;2018-08-04 10:05:00&quot; ...</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt;   .. .. ..$ Spoor         : chr [1:3] &quot;5&quot; NA &quot;18&quot;</span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt;   .. .. ..$ SpoorWijziging: chr [1:3] NA NA NA</span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt;  - attr(*, &quot;class&quot;)= chr &quot;AsIs&quot;</span></a></code></pre></div>
+<p>The API returns a lot of nested information, and as a consequence the data.frame is nested too.</p>
+<p>Every row is thus an advise with arrival and departure times and travelparts, if you have to switch trains there will be more than 1 row in the ReisDeel column. For instance in the first row:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">ams_to_ut<span class="op">$</span>ReisDeel[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt;   Vervoerder VervoerType RitNummer       Status</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; 1         NS   Intercity       835 VOLGENS-PLAN</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;                                                                                                               Stops</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; 1 Amsterdam Centraal, Amsterdam Amstel, Utrecht Centraal, 1533369900, 1533370380, 1533371460, 5, NA, 18, NA, NA, NA</span></a></code></pre></div>
+<p>And every part of the trip has stops where the train stops:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">ams_to_ut<span class="op">$</span>ReisDeel[[<span class="dv">1</span>]]<span class="op">$</span>Stops[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt;                 Naam                Tijd Spoor SpoorWijziging</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; 1 Amsterdam Centraal 2018-08-04 10:05:00     5           &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; 2   Amsterdam Amstel 2018-08-04 10:13:00  &lt;NA&gt;           &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; 3   Utrecht Centraal 2018-08-04 10:31:00    18           &lt;NA&gt;</span></a></code></pre></div>
+</div>
+</div>
+<div id="stationlist" class="section level1">
+<h1>Stationlist</h1>
+<p>Another endpoint of the API is a list of stations.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">stations &lt;-<span class="st"> </span><span class="kw">get_stationlist</span>()</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw">head</span>(stations)</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt;   Code                      Type        Namen Land UICCode      Lat</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; 1   HT knooppuntIntercitystation list(&quot;De....   NL 8400319 51.69048</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; 2  HTO          stoptreinstation list(&quot;Dn....   NL 8400320 51.70055</span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; 3  HDE          stoptreinstation list(&quot;'t....   NL 8400388 52.40917</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; 4 AHBF knooppuntIntercitystation list(&quot;Aa....    D 8015345 50.76780</span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; 5  ATN          stoptreinstation list(&quot;Aa....   NL 8400045 51.92133</span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; 6   AC          stoptreinstation list(&quot;Ab....   NL 8400047 52.27850</span></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt;        Lon   Synoniemen</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; 1 5.293620 list(&quot;He....</span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; 2 5.318333 list(&quot;He....</span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt; 3 5.893611 list(&quot;Ha....</span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt; 4 6.091499           NA</span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; 5 6.578627           NA</span></a>
+<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; 6 4.977000           NA</span></a>
+<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="kw">names</span>(stations)</a>
+<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt; [1] &quot;Code&quot;       &quot;Type&quot;       &quot;Namen&quot;      &quot;Land&quot;       &quot;UICCode&quot;   </span></a>
+<a class="sourceLine" id="cb10-19" data-line-number="19"><span class="co">#&gt; [6] &quot;Lat&quot;        &quot;Lon&quot;        &quot;Synoniemen&quot;</span></a></code></pre></div>
+<p>This will return a data frame with all the stations in the NS API. There are not only Dutch stations, but also multiple Belgian, German, English, Austrian, French,Polish and other country stations. Every station has an international code, name, synonyms, geolocation (Lat, Lon), and type of station.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># code is not executed, I don't want to add these dependencies to the package</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw">library</span>(ggrepel)</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">stations &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="st">  </span><span class="kw">get_stations</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Naam =</span> <span class="kw">map_chr</span>(Namen, <span class="op">~</span>.[[<span class="st">&quot;Kort&quot;</span>]][[<span class="dv">1</span>]]),</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">  <span class="dt">Label =</span> <span class="kw">ifelse</span>(Type <span class="op">==</span><span class="st"> &quot;knooppuntIntercitystation&quot;</span>, Naam,<span class="ot">NA</span>) ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="st">  </span><span class="kw">as.tibble</span>() </a>
+<a class="sourceLine" id="cb11-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10">stations <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="st">  </span><span class="kw">filter</span>(Land <span class="op">==</span><span class="st"> &quot;NL&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-12" data-line-number="12"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Lon, Lat, <span class="dt">label =</span> Label))<span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-13" data-line-number="13"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb11-14" data-line-number="14"><span class="st">  </span><span class="kw">geom_text_repel</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="st">  </span><span class="kw">coord_map</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb11-16" data-line-number="16"><span class="st">  </span><span class="kw">labs</span>(</a>
+<a class="sourceLine" id="cb11-17" data-line-number="17">    <span class="dt">title =</span> <span class="st">&quot;Only Dutch Stations&quot;</span>,</a>
+<a class="sourceLine" id="cb11-18" data-line-number="18">    <span class="dt">subtitle =</span> <span class="st">&quot;Major stations named&quot;</span>,</a>
+<a class="sourceLine" id="cb11-19" data-line-number="19">    <span class="dt">caption =</span> <span class="st">&quot;Data: NS 2018 (Dutch National Railways)&quot;</span></a>
+<a class="sourceLine" id="cb11-20" data-line-number="20">  )</a></code></pre></div>
+<div class="figure">
+<img src="data:image/png;base64,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" alt="Plot of Dutch stations’ locations" />
+<p class="caption">Plot of Dutch stations’ locations</p>
+</div>
+</div>
+<div id="departures" class="section level1">
+<h1>Departures</h1>
+<p>You can see the departure times of any station at this time by calling the <code>departures()</code> function.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">leiden_trains &lt;-<span class="st"> </span><span class="kw">get_departures</span>(<span class="dt">station =</span> <span class="st">&quot;Leiden Lammenschans&quot;</span>)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw">head</span>(leiden_trains)</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt;   RitNummer         VertrekTijd   EindBestemming TreinSoort</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt; 1           2018-08-04 10:57:00 Utrecht Centraal  Intercity</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt; 2           2018-08-04 11:02:00  Leiden Centraal  Intercity</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt; 3           2018-08-04 11:27:00 Utrecht Centraal  Intercity</span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt; 4           2018-08-04 11:32:00  Leiden Centraal  Intercity</span></a>
+<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt; 5           2018-08-04 11:57:00 Utrecht Centraal  Intercity</span></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt; 6           2018-08-04 12:02:00  Leiden Centraal  Intercity</span></a>
+<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt;        RouteTekst Vervoerder VertrekSpoor Spoorwijziging</span></a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt; 1 Alphen a/d Rijn                       1               </span></a>
+<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt; 2            &lt;NA&gt;                       1               </span></a>
+<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt; 3 Alphen a/d Rijn                       1               </span></a>
+<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt; 4            &lt;NA&gt;                       1               </span></a>
+<a class="sourceLine" id="cb12-15" data-line-number="15"><span class="co">#&gt; 5 Alphen a/d Rijn                       1               </span></a>
+<a class="sourceLine" id="cb12-16" data-line-number="16"><span class="co">#&gt; 6            &lt;NA&gt;                       1</span></a></code></pre></div>
+</div>
+<div id="disruptions-and-maintenance" class="section level1">
+<h1>Disruptions and maintenance</h1>
+<p>These 3 functions call out to find out about disruptions and engineering on the tracks for the current time, for the next 2 weeks or a specific station. Every call returns a dataframe with “id”, “Traject”, “Periode”, “Reden”, “Bericht”, “Advies”, and “Datum”.</p>
+<p>Bericht is often a complete message with html markup:</p>
+<pre><code>&lt;p&gt;\n&lt;b&gt;Wanneer: vanaf zaterdag 26 mei &lt;/b&gt;&lt;br/&gt;\n&lt;b&gt;Oorzaak: aangepaste dienstregeling&lt;/b&gt;&lt;br/&gt;\n&lt;b&gt;Advies: U kunt gebruikmaken van de gewijzigde dienstregeling&lt;/b&gt;\n&lt;br/&gt;Stoptreinen tussen Roosendaal en Antwerpen Centraal/Puurs rijden in een aangepaste dienstregeling; reizigers dienen in Essen (B) over te stappen op een andere trein\n&lt;br/&gt; plan uw reis in de Internationale Reisplanner\n&lt;br/&gt; &lt;br/&gt;\n  &lt;b&gt;Extra reistijd: een kwartier tot een half uur&lt;/b&gt;&lt;br/&gt;\n&lt;/p&gt;</code></pre>
+<div id="current-disruptions-unscheduled-disruptions-current-engineering-work" class="section level2">
+<h2>Current disruptions (=unscheduled disruptions + current engineering work)</h2>
+<p>Showing only columns Traject and Periode:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">current &lt;-<span class="st"> </span><span class="kw">get_current_disruptions</span>()</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">current[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="kw">c</span>(<span class="st">&quot;Traject&quot;</span>, <span class="st">&quot;Periode&quot;</span>)] <span class="co"># I'll show a sample of the responses</span></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co">#&gt;                         Traject</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt; 1 Roosendaal-Antwerpen C.-Puurs</span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="co">#&gt; 2  Rotterdam Centraal-Dordrecht</span></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="co">#&gt;                                                    Periode</span></a>
+<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="co">#&gt; 1                                   vanaf zaterdag 26 mei </span></a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="co">#&gt; 2 maandag 30 juli tot en met maandag 6 augustus 00.40 uur</span></a></code></pre></div>
+</div>
+<div id="scheduled-engineering-workscheduled-engineering-work" class="section level2">
+<h2>Scheduled engineering work(=scheduled engineering work)</h2>
+<p>This call returns scheduled engineering work for the next 2 weeks.</p>
+<p>example:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">sched &lt;-<span class="st"> </span><span class="kw">get_scheduled_engineering_work</span>()</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">sched[<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>,<span class="kw">c</span>(<span class="st">&quot;Traject&quot;</span>,<span class="st">&quot;Periode&quot;</span>, <span class="st">&quot;Advies&quot;</span>)]</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt;                                                         Traject</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt; 2                                  Rotterdam Centraal-Dordrecht</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt; 3                                         Alphen a/d Rijn-Gouda</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt; 4 Rotterdam Centraal/Den Haag Centraal-Woerden-Utrecht Centraal</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt;                                                    Periode</span></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt; 2 maandag 30 juli tot en met maandag 6 augustus 00.40 uur </span></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="co">#&gt; 3            maandag 30 juli tot en met maandag 6 augustus</span></a>
+<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="co">#&gt; 4            maandag 30 juli tot en met maandag 6 augustus</span></a>
+<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="co">#&gt;               Advies</span></a>
+<a class="sourceLine" id="cb15-12" data-line-number="12"><span class="co">#&gt; 2 Raadpleeg Internet</span></a>
+<a class="sourceLine" id="cb15-13" data-line-number="13"><span class="co">#&gt; 3 Raadpleeg Internet</span></a>
+<a class="sourceLine" id="cb15-14" data-line-number="14"><span class="co">#&gt; 4 Raadpleeg Internet</span></a></code></pre></div>
+</div>
+<div id="current-disruptions-for-a-specific-station-unscheduled-disruptions-current-engineering-work" class="section level2">
+<h2>Current disruptions for a specific station (=unscheduled disruptions + current engineering work)</h2>
+<p>Showing only first 2 messages:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">get_disruptions_station</span>(<span class="dt">station =</span> <span class="st">&quot;Rotterdam Centraal&quot;</span>)<span class="op">$</span>Bericht[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt; [1] &quot;&lt;p&gt;\n&lt;b&gt;Wanneer: vanaf zaterdag 26 mei &lt;/b&gt;&lt;br/&gt;\n&lt;b&gt;Oorzaak: aangepaste dienstregeling&lt;/b&gt;&lt;br/&gt;\n&lt;b&gt;Advies: U kunt gebruikmaken van de gewijzigde dienstregeling&lt;/b&gt;\n&lt;br/&gt;Stoptreinen tussen Roosendaal en Antwerpen Centraal/Puurs rijden in een aangepaste dienstregeling; reizigers dienen in Essen (B) over te stappen op een andere trein\n&lt;br/&gt; plan uw reis in de Internationale Reisplanner\n&lt;br/&gt; &lt;br/&gt;\n  &lt;b&gt;Extra reistijd: een kwartier tot een half uur&lt;/b&gt;&lt;br/&gt;\n&lt;/p&gt;&quot;</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt; [2] &quot;&lt;p&gt;\n&lt;b&gt;Wanneer: maandag 30 juli tot en met maandag 6 augustus 00.40 uur &lt;/b&gt;&lt;br/&gt;\n&lt;b&gt;Oorzaak: werkzaamheden&lt;/b&gt;&lt;br/&gt;\n&lt;b&gt;Advies: U kunt gebruikmaken van de gewijzigde dienstregeling&lt;/b&gt;\n&lt;br/&gt;de dienstregeling is aangepast tussen Rotterdam Centraal en Dordrecht\n&lt;br/&gt; &lt;br/&gt;\n  &lt;b&gt;Extra reistijd: geen extra reistijd&lt;/b&gt;&lt;br/&gt;\n&lt;/p&gt;&quot;</span></a></code></pre></div>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
