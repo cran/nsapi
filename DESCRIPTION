@@ -1,5 +1,5 @@
 Package: nsapi
-Version: 0.1.0
+Version: 0.1.1
 Title: Connect to the NS (Dutch Railways) API
 Description: Access the NS api and download current departure times, 
     disruptions and engineering work, the station list, and
@@ -20,12 +20,12 @@ URL: https://github.com/RMHogervorst/nsapi ,
         https://rmhogervorst.nl/nsapi/
 BugReports: https://github.com/RMHogervorst/nsapi/issues
 RoxygenNote: 6.1.0
-Suggests: testthat, knitr, rmarkdown
+Suggests: testthat, knitr, rmarkdown, covr
 Imports: crul, xml2
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2018-08-04 08:41:01 UTC; roel
+Packaged: 2018-08-10 19:42:42 UTC; roel
 Author: Roel M. Hogervorst [cre, aut] (<https://orcid.org/0000-0001-7509-0328>)
 Maintainer: Roel M. Hogervorst <hogervorst.rm@gmail.com>
 Repository: CRAN
-Date/Publication: 2018-08-06 17:10:06 UTC
+Date/Publication: 2018-08-11 05:20:02 UTC

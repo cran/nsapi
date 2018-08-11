@@ -12,7 +12,7 @@
 
 <meta name="author" content="Roel M. Hogervorst" />
 
-<meta name="date" content="2018-08-04" />
+<meta name="date" content="2018-08-10" />
 
 <title>Basic use of the nsapi package</title>
 
@@ -278,7 +278,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Basic use of the nsapi package</h1>
 <h4 class="author"><em>Roel M. Hogervorst</em></h4>
-<h4 class="date"><em>2018-08-04</em></h4>
+<h4 class="date"><em>2018-08-10</em></h4>
 
 
 
@@ -322,15 +322,15 @@ NSAPIACCOUNT = probablyyouremail@email.com</code></pre>
 <a class="sourceLine" id="cb5-7" data-line-number="7">)</a>
 <a class="sourceLine" id="cb5-8" data-line-number="8">ams_to_ut[,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a>
 <a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;   Melding AantalOverstappen GeplandeReisTijd ActueleReisTijd</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 1      NA                 0             0:26            0:26</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 1      NA                 0             0:27            0:27</span></a>
 <a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; 2      NA                 0             0:26            0:26</span></a>
 <a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; 3      NA                 0             0:27            0:27</span></a>
 <a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; 4      NA                 0             0:26            0:26</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 5      NA                 0             0:24            0:24</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 6      NA                 0             0:27            0:27</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 5      NA                 0             0:27            0:27</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 6      NA                 0             0:26            0:26</span></a>
 <a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; 7      NA                 0             0:27            0:27</span></a>
 <a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; 8      NA                 0             0:26            0:26</span></a>
-<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt; 9      NA                 0             0:26            0:26</span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt; 9      NA                 0             0:27            0:27</span></a>
 <a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#&gt;   VertrekVertraging</span></a>
 <a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">#&gt; 1              &lt;NA&gt;</span></a>
 <a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#&gt; 2              &lt;NA&gt;</span></a>
@@ -344,15 +344,15 @@ NSAPIACCOUNT = probablyyouremail@email.com</code></pre>
 <p>The function returns a data.frame with 4 advises before and 4 after the time you selected.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">ams_to_ut[,<span class="dv">6</span><span class="op">:</span><span class="dv">8</span>]</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt;   AankomstVertraging Optimaal GeplandeVertrekTijd</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; 1               &lt;NA&gt;    FALSE 2018-08-04 10:05:00</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; 2               &lt;NA&gt;    FALSE 2018-08-04 10:14:00</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; 3               &lt;NA&gt;    FALSE 2018-08-04 10:25:00</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 4               &lt;NA&gt;    FALSE 2018-08-04 10:35:00</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 5               &lt;NA&gt;     TRUE 2018-08-04 10:40:00</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 6               &lt;NA&gt;    FALSE 2018-08-04 10:45:00</span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; 7               &lt;NA&gt;    FALSE 2018-08-04 10:55:00</span></a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; 8               &lt;NA&gt;    FALSE 2018-08-04 11:05:00</span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; 9               &lt;NA&gt;    FALSE 2018-08-04 11:14:00</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; 1               &lt;NA&gt;    FALSE 2018-08-10 20:55:00</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; 2               &lt;NA&gt;    FALSE 2018-08-10 21:11:00</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; 3               &lt;NA&gt;    FALSE 2018-08-10 21:25:00</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 4               &lt;NA&gt;    FALSE 2018-08-10 21:41:00</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 5               &lt;NA&gt;     TRUE 2018-08-10 21:55:00</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 6               &lt;NA&gt;    FALSE 2018-08-10 22:11:00</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; 7               &lt;NA&gt;    FALSE 2018-08-10 22:25:00</span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; 8               &lt;NA&gt;    FALSE 2018-08-10 22:41:00</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; 9               &lt;NA&gt;    FALSE 2018-08-10 22:55:00</span></a></code></pre></div>
 <div id="more-details-about-the-returned-dataframe." class="section level2">
 <h2>More details about the returned dataframe.</h2>
 <p>The column Reisdeel is a nested data frame with a nested data frame called stops within.</p>
@@ -361,28 +361,28 @@ NSAPIACCOUNT = probablyyouremail@email.com</code></pre>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt;  $ :'data.frame':    1 obs. of  5 variables:</span></a>
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;   ..$ Vervoerder : chr &quot;NS&quot;</span></a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;   ..$ VervoerType: chr &quot;Intercity&quot;</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;   ..$ RitNummer  : chr &quot;835&quot;</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;   ..$ RitNummer  : chr &quot;3077&quot;</span></a>
 <a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;   ..$ Status     : chr &quot;VOLGENS-PLAN&quot;</span></a>
 <a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt;   ..$ Stops      :List of 1</span></a>
 <a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt;   .. ..$ :'data.frame':  3 obs. of  4 variables:</span></a>
 <a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt;   .. .. ..$ Naam          : chr [1:3] &quot;Amsterdam Centraal&quot; &quot;Amsterdam Amstel&quot; &quot;Utrecht Centraal&quot;</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt;   .. .. ..$ Tijd          : POSIXct[1:3], format: &quot;2018-08-04 10:05:00&quot; ...</span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt;   .. .. ..$ Spoor         : chr [1:3] &quot;5&quot; NA &quot;18&quot;</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt;   .. .. ..$ Tijd          : POSIXct[1:3], format: &quot;2018-08-10 20:55:00&quot; ...</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt;   .. .. ..$ Spoor         : chr [1:3] &quot;5b&quot; NA &quot;19&quot;</span></a>
 <a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt;   .. .. ..$ SpoorWijziging: chr [1:3] NA NA NA</span></a>
 <a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt;  - attr(*, &quot;class&quot;)= chr &quot;AsIs&quot;</span></a></code></pre></div>
 <p>The API returns a lot of nested information, and as a consequence the data.frame is nested too.</p>
 <p>Every row is thus an advise with arrival and departure times and travelparts, if you have to switch trains there will be more than 1 row in the ReisDeel column. For instance in the first row:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">ams_to_ut<span class="op">$</span>ReisDeel[[<span class="dv">1</span>]]</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt;   Vervoerder VervoerType RitNummer       Status</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; 1         NS   Intercity       835 VOLGENS-PLAN</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;                                                                                                               Stops</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; 1 Amsterdam Centraal, Amsterdam Amstel, Utrecht Centraal, 1533369900, 1533370380, 1533371460, 5, NA, 18, NA, NA, NA</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; 1         NS   Intercity      3077 VOLGENS-PLAN</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;                                                                                                                Stops</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; 1 Amsterdam Centraal, Amsterdam Amstel, Utrecht Centraal, 1533927300, 1533927780, 1533928920, 5b, NA, 19, NA, NA, NA</span></a></code></pre></div>
 <p>And every part of the trip has stops where the train stops:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">ams_to_ut<span class="op">$</span>ReisDeel[[<span class="dv">1</span>]]<span class="op">$</span>Stops[[<span class="dv">1</span>]]</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt;                 Naam                Tijd Spoor SpoorWijziging</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; 1 Amsterdam Centraal 2018-08-04 10:05:00     5           &lt;NA&gt;</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; 2   Amsterdam Amstel 2018-08-04 10:13:00  &lt;NA&gt;           &lt;NA&gt;</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; 3   Utrecht Centraal 2018-08-04 10:31:00    18           &lt;NA&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; 1 Amsterdam Centraal 2018-08-10 20:55:00    5b           &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; 2   Amsterdam Amstel 2018-08-10 21:03:00  &lt;NA&gt;           &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; 3   Utrecht Centraal 2018-08-10 21:22:00    19           &lt;NA&gt;</span></a></code></pre></div>
 </div>
 </div>
 <div id="stationlist" class="section level1">
@@ -439,12 +439,12 @@ NSAPIACCOUNT = probablyyouremail@email.com</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">leiden_trains &lt;-<span class="st"> </span><span class="kw">get_departures</span>(<span class="dt">station =</span> <span class="st">&quot;Leiden Lammenschans&quot;</span>)</a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw">head</span>(leiden_trains)</a>
 <a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt;   RitNummer         VertrekTijd   EindBestemming TreinSoort</span></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt; 1           2018-08-04 10:57:00 Utrecht Centraal  Intercity</span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt; 2           2018-08-04 11:02:00  Leiden Centraal  Intercity</span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt; 3           2018-08-04 11:27:00 Utrecht Centraal  Intercity</span></a>
-<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt; 4           2018-08-04 11:32:00  Leiden Centraal  Intercity</span></a>
-<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt; 5           2018-08-04 11:57:00 Utrecht Centraal  Intercity</span></a>
-<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt; 6           2018-08-04 12:02:00  Leiden Centraal  Intercity</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt; 1           2018-08-10 21:57:00 Utrecht Centraal  Intercity</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt; 2           2018-08-10 22:02:00  Leiden Centraal  Intercity</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt; 3           2018-08-10 22:27:00 Utrecht Centraal  Intercity</span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt; 4           2018-08-10 22:32:00  Leiden Centraal  Intercity</span></a>
+<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt; 5           2018-08-10 22:57:00 Utrecht Centraal  Intercity</span></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt; 6           2018-08-10 23:02:00  Leiden Centraal  Intercity</span></a>
 <a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt;        RouteTekst Vervoerder VertrekSpoor Spoorwijziging</span></a>
 <a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt; 1 Alphen a/d Rijn                       1               </span></a>
 <a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt; 2            &lt;NA&gt;                       1               </span></a>
@@ -463,12 +463,9 @@ NSAPIACCOUNT = probablyyouremail@email.com</code></pre>
 <p>Showing only columns Traject and Periode:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">current &lt;-<span class="st"> </span><span class="kw">get_current_disruptions</span>()</a>
 <a class="sourceLine" id="cb14-2" data-line-number="2">current[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="kw">c</span>(<span class="st">&quot;Traject&quot;</span>, <span class="st">&quot;Periode&quot;</span>)] <span class="co"># I'll show a sample of the responses</span></a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co">#&gt;                         Traject</span></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt; 1 Roosendaal-Antwerpen C.-Puurs</span></a>
-<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="co">#&gt; 2  Rotterdam Centraal-Dordrecht</span></a>
-<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="co">#&gt;                                                    Periode</span></a>
-<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="co">#&gt; 1                                   vanaf zaterdag 26 mei </span></a>
-<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="co">#&gt; 2 maandag 30 juli tot en met maandag 6 augustus 00.40 uur</span></a></code></pre></div>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co">#&gt;                         Traject                                  Periode</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt; 1 Roosendaal-Antwerpen C.-Puurs                   vanaf zaterdag 26 mei </span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="co">#&gt; 2             Zwolle-Amersfoort vrijdag 10 tot en met zondag 12 augustus</span></a></code></pre></div>
 </div>
 <div id="scheduled-engineering-workscheduled-engineering-work" class="section level2">
 <h2>Scheduled engineering work(=scheduled engineering work)</h2>
@@ -476,14 +473,14 @@ NSAPIACCOUNT = probablyyouremail@email.com</code></pre>
 <p>example:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">sched &lt;-<span class="st"> </span><span class="kw">get_scheduled_engineering_work</span>()</a>
 <a class="sourceLine" id="cb15-2" data-line-number="2">sched[<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>,<span class="kw">c</span>(<span class="st">&quot;Traject&quot;</span>,<span class="st">&quot;Periode&quot;</span>, <span class="st">&quot;Advies&quot;</span>)]</a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt;                                                         Traject</span></a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt; 2                                  Rotterdam Centraal-Dordrecht</span></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt; 3                                         Alphen a/d Rijn-Gouda</span></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt; 4 Rotterdam Centraal/Den Haag Centraal-Woerden-Utrecht Centraal</span></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt;                                                    Periode</span></a>
-<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt; 2 maandag 30 juli tot en met maandag 6 augustus 00.40 uur </span></a>
-<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="co">#&gt; 3            maandag 30 juli tot en met maandag 6 augustus</span></a>
-<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="co">#&gt; 4            maandag 30 juli tot en met maandag 6 augustus</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt;                Traject</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt; 2    Zwolle-Amersfoort</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt; 3 Heerlen-Herzogenrath</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt; 4          Oss-Wijchen</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt;                                                              Periode</span></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt; 2                           vrijdag 10 tot en met zondag 12 augustus</span></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="co">#&gt; 3                                vrijdag 10 augustus vanaf 22.50 uur</span></a>
+<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="co">#&gt; 4 in de nacht van vrijdag 10 op zaterdag 11 augustus vanaf 00.20 uur</span></a>
 <a class="sourceLine" id="cb15-11" data-line-number="11"><span class="co">#&gt;               Advies</span></a>
 <a class="sourceLine" id="cb15-12" data-line-number="12"><span class="co">#&gt; 2 Raadpleeg Internet</span></a>
 <a class="sourceLine" id="cb15-13" data-line-number="13"><span class="co">#&gt; 3 Raadpleeg Internet</span></a>
@@ -493,8 +490,8 @@ NSAPIACCOUNT = probablyyouremail@email.com</code></pre>
 <h2>Current disruptions for a specific station (=unscheduled disruptions + current engineering work)</h2>
 <p>Showing only first 2 messages:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">get_disruptions_station</span>(<span class="dt">station =</span> <span class="st">&quot;Rotterdam Centraal&quot;</span>)<span class="op">$</span>Bericht[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt; [1] &quot;&lt;p&gt;\n&lt;b&gt;Wanneer: vanaf zaterdag 26 mei &lt;/b&gt;&lt;br/&gt;\n&lt;b&gt;Oorzaak: aangepaste dienstregeling&lt;/b&gt;&lt;br/&gt;\n&lt;b&gt;Advies: U kunt gebruikmaken van de gewijzigde dienstregeling&lt;/b&gt;\n&lt;br/&gt;Stoptreinen tussen Roosendaal en Antwerpen Centraal/Puurs rijden in een aangepaste dienstregeling; reizigers dienen in Essen (B) over te stappen op een andere trein\n&lt;br/&gt; plan uw reis in de Internationale Reisplanner\n&lt;br/&gt; &lt;br/&gt;\n  &lt;b&gt;Extra reistijd: een kwartier tot een half uur&lt;/b&gt;&lt;br/&gt;\n&lt;/p&gt;&quot;</span></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt; [2] &quot;&lt;p&gt;\n&lt;b&gt;Wanneer: maandag 30 juli tot en met maandag 6 augustus 00.40 uur &lt;/b&gt;&lt;br/&gt;\n&lt;b&gt;Oorzaak: werkzaamheden&lt;/b&gt;&lt;br/&gt;\n&lt;b&gt;Advies: U kunt gebruikmaken van de gewijzigde dienstregeling&lt;/b&gt;\n&lt;br/&gt;de dienstregeling is aangepast tussen Rotterdam Centraal en Dordrecht\n&lt;br/&gt; &lt;br/&gt;\n  &lt;b&gt;Extra reistijd: geen extra reistijd&lt;/b&gt;&lt;br/&gt;\n&lt;/p&gt;&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt; [1] &quot;&lt;p&gt;\n&lt;b&gt;Wanneer: vanaf zaterdag 26 mei &lt;/b&gt;&lt;br/&gt;\n&lt;b&gt;Oorzaak: aangepaste dienstregeling&lt;/b&gt;&lt;br/&gt;\n&lt;b&gt;Advies: U kunt gebruikmaken van de gewijzigde dienstregeling&lt;/b&gt;\n&lt;br/&gt;Stoptreinen tussen Roosendaal en Antwerpen Centraal/Puurs rijden in een aangepaste dienstregeling; reizigers dienen in Essen (B) over te stappen op een andere trein\n&lt;br/&gt; plan uw reis in de Internationale Reisplanner\n&lt;br/&gt; &lt;br/&gt;\n  &lt;b&gt;Extra reistijd: een kwartier tot een half uur&lt;/b&gt;&lt;br/&gt;\n&lt;/p&gt;&quot;                                                                                                                                                                  </span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt; [2] &quot;&lt;p&gt;\n&lt;b&gt;Wanneer: vrijdag 10 tot en met zondag 12 augustus&lt;/b&gt;&lt;br/&gt;\n&lt;b&gt;Oorzaak: werkzaamheden&lt;/b&gt;&lt;br/&gt;\n&lt;b&gt;Advies: U kunt gebruikmaken van de omreisroute of de bussen&lt;/b&gt;\n&lt;br/&gt;reis tussen Zwolle en Amersfoort via Deventer \n&lt;br/&gt; reis tussen Zwolle en Utrecht Centraal via Amsterdam Zuid of via Deventer\n&lt;br/&gt; reis tussen Zwolle en Rotterdam Centraal via Leiden Centraal of via Schiphol Airport met Intercity direct\n&lt;br/&gt; er rijden bussen tussen 't Harde en Amersfoort\n&lt;br/&gt; tussen Amersfoort Vathorst en Amersfoort is de dienstregeling aangepast\n&lt;br/&gt; &lt;br/&gt;\n  &lt;b&gt;Extra reistijd: een kwartier tot drie kwartier&lt;/b&gt;&lt;br/&gt;\n&lt;/p&gt;&quot;</span></a></code></pre></div>
 </div>
 </div>
 
